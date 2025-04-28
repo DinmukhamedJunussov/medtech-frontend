@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { FileText, PenLine } from "lucide-react"
+import { FileText, PenLine, Upload } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
-  title: "Blood Test Interpreter | Home",
+  title: "Интерпретатор Анализов Крови | Главная",
   description:
-    "Upload or manually enter your blood test results for professional interpretation and personalized health recommendations.",
+    "Загрузите или введите вручную результаты анализа крови для профессиональной интерпретации и персонализированных рекомендаций по здоровью.",
 }
 
 export default function Home() {
@@ -17,17 +17,17 @@ export default function Home() {
         <div className="container flex h-16 items-center px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2 font-semibold text-lg text-sky-600">
             <FileText className="h-5 w-5" />
-            <span>BloodTest Interpreter</span>
+            <span>Интерпретатор Анализов</span>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
             <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-              About
+              О нас
             </Link>
             <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-              FAQ
+              Вопросы
             </Link>
             <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-              Contact
+              Контакты
             </Link>
           </nav>
         </div>
@@ -38,48 +38,36 @@ export default function Home() {
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Understand Your Blood Test Results
+                  Понимайте Результаты Ваших Анализов Крови
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Get personalized interpretations and health recommendations based on your lab results.
+                  Получите персонализированную интерпретацию и рекомендации по здоровью на основе ваших лабораторных
+                  результатов.
                 </p>
               </div>
             </div>
 
             <div className="mx-auto max-w-5xl py-12">
-              <h2 className="text-3xl font-bold text-center mb-12">How would you like to analyze your results?</h2>
+              <h2 className="text-3xl font-bold text-center mb-12">Как вы хотите проанализировать ваши результаты?</h2>
 
               <div className="grid gap-8 md:grid-cols-2">
                 <div className="border rounded-lg p-8 hover:shadow-md transition-shadow">
-                  <div className="flex flex-col items-start">
-                    <div className="bg-sky-100 rounded-full p-4 mb-6">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-sky-600"
-                      >
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="17 8 12 3 7 8" />
-                        <line x1="12" x2="12" y1="3" y2="15" />
-                      </svg>
-                    </div>
+                  <div className="flex flex-col h-full justify-between">
+                    <div>
+                      <div className="w-24 h-24 bg-sky-100 rounded-full flex items-center justify-center mb-6">
+                        <Upload className="h-10 w-10 text-sky-600" />
+                      </div>
 
-                    <h3 className="text-2xl font-bold mb-2">Upload Test Results</h3>
-                    <p className="text-muted-foreground mb-2">
-                      Upload your lab report and our system will extract and analyze the values.
-                    </p>
-                    <p className="text-sm text-muted-foreground mb-8">Supported formats: JPG, PNG, PDF</p>
+                      <h3 className="text-2xl font-bold mb-2">Загрузить Результаты Анализов</h3>
+                      <p className="text-muted-foreground mb-2">
+                        Загрузите ваш лабораторный отчет, и наша система извлечет и проанализирует значения.
+                      </p>
+                      <p className="text-sm text-muted-foreground mb-8">Поддерживаемые форматы: JPG, PNG, PDF</p>
+                    </div>
 
                     <Button asChild className="w-full bg-sky-500 hover:bg-sky-600">
                       <Link href="/upload" className="flex items-center justify-center">
-                        Get Started
+                        Начать
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -101,32 +89,22 @@ export default function Home() {
                 </div>
 
                 <div className="border rounded-lg p-8 hover:shadow-md transition-shadow">
-                  <div className="flex flex-col items-start">
-                    <div className="bg-sky-100 rounded-full p-4 mb-6">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-sky-600"
-                      >
-                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                        <polyline points="14 2 14 8 20 8" />
-                      </svg>
-                    </div>
+                  <div className="flex flex-col h-full justify-between">
+                    <div>
+                      <div className="w-24 h-24 bg-sky-100 rounded-full flex items-center justify-center mb-6">
+                        <FileText className="h-10 w-10 text-sky-600" />
+                      </div>
 
-                    <h3 className="text-2xl font-bold mb-2">Manual Entry</h3>
-                    <p className="text-muted-foreground mb-2">Input your blood test values manually into our form.</p>
-                    <p className="text-muted-foreground mb-8">Enter your lab values manually in our form</p>
+                      <h3 className="text-2xl font-bold mb-2">Ручной Ввод</h3>
+                      <p className="text-muted-foreground mb-2">Введите значения анализа крови вручную в нашу форму.</p>
+                      <p className="text-muted-foreground mb-8">
+                        Введите значения ваших лабораторных показателей вручную в нашу форму
+                      </p>
+                    </div>
 
                     <Button asChild className="w-full bg-sky-500 hover:bg-sky-600">
                       <Link href="/manual-entry" className="flex items-center justify-center">
-                        Get Started
+                        Начать
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -150,8 +128,8 @@ export default function Home() {
             </div>
             <div className="mx-auto max-w-3xl text-center">
               <p className="text-muted-foreground">
-                Our advanced algorithm analyzes your blood test results and provides personalized insights based on the
-                latest medical research.
+                Наш продвинутый алгоритм анализирует результаты вашего анализа крови и предоставляет персонализированные
+                выводы на основе последних медицинских исследований.
               </p>
             </div>
           </div>
@@ -161,20 +139,20 @@ export default function Home() {
             <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-3 lg:gap-12">
               <div className="flex flex-col items-center space-y-2 text-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sky-600">
-                  <FileText className="h-6 w-6" />
+                  <Upload className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold">Easy Upload</h3>
+                <h3 className="text-xl font-bold">Простая Загрузка</h3>
                 <p className="text-muted-foreground">
-                  Simply upload an image or PDF of your blood test results for instant analysis.
+                  Просто загрузите изображение или PDF-файл с результатами анализа крови для мгновенного анализа.
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2 text-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sky-600">
                   <PenLine className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold">Manual Entry</h3>
+                <h3 className="text-xl font-bold">Ручной Ввод</h3>
                 <p className="text-muted-foreground">
-                  Enter your blood test values manually for a detailed interpretation.
+                  Введите значения анализа крови вручную для детальной интерпретации.
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2 text-center">
@@ -194,9 +172,9 @@ export default function Home() {
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold">Personalized Insights</h3>
+                <h3 className="text-xl font-bold">Персонализированные Выводы</h3>
                 <p className="text-muted-foreground">
-                  Receive tailored health recommendations based on your unique results.
+                  Получите индивидуальные рекомендации по здоровью на основе ваших уникальных результатов.
                 </p>
               </div>
             </div>
@@ -206,14 +184,14 @@ export default function Home() {
       <footer className="border-t bg-white">
         <div className="container flex flex-col gap-2 sm:flex-row py-6 w-full items-center px-4 md:px-6">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} BloodTest Interpreter. All rights reserved.
+            © {new Date().getFullYear()} Интерпретатор Анализов Крови. Все права защищены.
           </p>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
             <Link href="#" className="text-xs hover:underline underline-offset-4">
-              Terms of Service
+              Условия использования
             </Link>
             <Link href="#" className="text-xs hover:underline underline-offset-4">
-              Privacy
+              Конфиденциальность
             </Link>
           </nav>
         </div>

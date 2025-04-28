@@ -30,7 +30,7 @@ export default function UploadPage() {
     e.preventDefault()
 
     if (!file) {
-      setError("Please select a file to upload")
+      setError("Пожалуйста, выберите файл для загрузки")
       return
     }
 
@@ -39,7 +39,7 @@ export default function UploadPage() {
     const validTypes = ["image/jpeg", "image/png", "application/pdf"]
 
     if (!validTypes.includes(fileType)) {
-      setError("Please upload a JPG, PNG, or PDF file")
+      setError("Пожалуйста, загрузите файл в формате JPG, PNG или PDF")
       return
     }
 
@@ -61,7 +61,7 @@ export default function UploadPage() {
       // Navigate to results page
       router.push("/results")
     } catch (err) {
-      setError("An error occurred while analyzing your results. Please try again.")
+      setError("Произошла ошибка при анализе ваших результатов. Пожалуйста, попробуйте снова.")
       console.error(err)
     } finally {
       setIsLoading(false)
@@ -72,27 +72,27 @@ export default function UploadPage() {
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <Link href="/" className="inline-flex items-center text-sm font-medium text-sky-600 mb-6 hover:underline">
         <ArrowLeft className="mr-1 h-4 w-4" />
-        Back to Home
+        Вернуться на Главную
       </Link>
 
       <Card className="w-full">
         <CardHeader>
           <CardTitle className="text-2xl flex items-center gap-2">
             <FileText className="h-6 w-6 text-sky-600" />
-            Upload Blood Test Results
+            Загрузить Результаты Анализа Крови
           </CardTitle>
-          <CardDescription>Upload an image or PDF of your blood test results for analysis</CardDescription>
+          <CardDescription>Загрузите изображение или PDF-файл с результатами анализа крови для анализа</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="file-upload">Upload File</Label>
+              <Label htmlFor="file-upload">Загрузить Файл</Label>
               <div className="border-2 border-dashed border-gray-200 rounded-lg p-8 text-center">
                 <div className="flex flex-col items-center justify-center gap-2">
                   <Upload className="h-8 w-8 text-muted-foreground" />
                   <div className="flex flex-col items-center gap-1">
-                    <p className="text-sm font-medium">Drag and drop your file here or click to browse</p>
-                    <p className="text-xs text-muted-foreground">Supports JPG, PNG, and PDF files</p>
+                    <p className="text-sm font-medium">Перетащите файл сюда или нажмите для выбора</p>
+                    <p className="text-xs text-muted-foreground">Поддерживаются форматы JPG, PNG и PDF</p>
                   </div>
                   <Input
                     id="file-upload"
@@ -107,13 +107,13 @@ export default function UploadPage() {
                     size="sm"
                     onClick={() => document.getElementById("file-upload")?.click()}
                   >
-                    Select File
+                    Выбрать Файл
                   </Button>
                 </div>
               </div>
               {file && (
                 <p className="text-sm text-muted-foreground mt-2">
-                  Selected file: <span className="font-medium">{file.name}</span>
+                  Выбранный файл: <span className="font-medium">{file.name}</span>
                 </p>
               )}
               {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
@@ -122,16 +122,16 @@ export default function UploadPage() {
               {isLoading ? (
                 <>
                   <LoadingSpinner className="mr-2" />
-                  Analyzing Results...
+                  Анализ Результатов...
                 </>
               ) : (
-                "Analyze Results"
+                "Анализировать Результаты"
               )}
             </Button>
           </form>
         </CardContent>
         <CardFooter className="flex flex-col text-center text-sm text-muted-foreground">
-          <p>Your data is processed securely and confidentially.</p>
+          <p>Ваши данные обрабатываются безопасно и конфиденциально.</p>
         </CardFooter>
       </Card>
     </div>

@@ -60,13 +60,13 @@ export default function ResultsPage() {
     return (
       <div className="container max-w-4xl mx-auto px-4 py-8">
         <Alert variant="destructive">
-          <AlertTitle>No results found</AlertTitle>
+          <AlertTitle>Результаты не найдены</AlertTitle>
           <AlertDescription>
-            We couldn't find any analysis results. Please return to the home page and try again.
+            Мы не смогли найти результаты анализа. Пожалуйста, вернитесь на главную страницу и попробуйте снова.
           </AlertDescription>
         </Alert>
         <Button asChild className="mt-4">
-          <Link href="/">Return to Home</Link>
+          <Link href="/">Вернуться на Главную</Link>
         </Button>
       </div>
     )
@@ -80,7 +80,7 @@ export default function ResultsPage() {
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <Link href="/" className="inline-flex items-center text-sm font-medium text-sky-600 mb-6 hover:underline">
         <ArrowLeft className="mr-1 h-4 w-4" />
-        Back to Home
+        Вернуться на Главную
       </Link>
 
       <div className="space-y-8">
@@ -89,26 +89,26 @@ export default function ResultsPage() {
             <div className="flex items-center justify-between">
               <CardTitle className="text-2xl flex items-center gap-2">
                 <FileText className="h-6 w-6 text-sky-600" />
-                Blood Test Results
+                Результаты Анализа Крови
               </CardTitle>
               <Badge variant={abnormalResults.length > 0 ? "destructive" : "default"}>
-                {abnormalResults.length > 0 ? "Abnormalities Detected" : "All Results Normal"}
+                {abnormalResults.length > 0 ? "Обнаружены Отклонения" : "Все Результаты в Норме"}
               </Badge>
             </div>
           </CardHeader>
           <CardContent className="pt-6">
             <Tabs defaultValue="all" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="all">All Results</TabsTrigger>
+                <TabsTrigger value="all">Все Результаты</TabsTrigger>
                 <TabsTrigger value="abnormal">
-                  Abnormal
+                  Отклонения
                   {abnormalResults.length > 0 && (
                     <Badge variant="destructive" className="ml-2">
                       {abnormalResults.length}
                     </Badge>
                   )}
                 </TabsTrigger>
-                <TabsTrigger value="normal">Normal</TabsTrigger>
+                <TabsTrigger value="normal">Норма</TabsTrigger>
               </TabsList>
 
               <TabsContent value="all" className="pt-4">
@@ -117,10 +117,10 @@ export default function ResultsPage() {
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b bg-muted/50">
-                          <th className="px-4 py-2.5 text-left font-medium">Test</th>
-                          <th className="px-4 py-2.5 text-left font-medium">Result</th>
-                          <th className="px-4 py-2.5 text-left font-medium">Reference Range</th>
-                          <th className="px-4 py-2.5 text-left font-medium">Status</th>
+                          <th className="px-4 py-2.5 text-left font-medium">Тест</th>
+                          <th className="px-4 py-2.5 text-left font-medium">Результат</th>
+                          <th className="px-4 py-2.5 text-left font-medium">Референсный Диапазон</th>
+                          <th className="px-4 py-2.5 text-left font-medium">Статус</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -145,23 +145,23 @@ export default function ResultsPage() {
                                           variant="outline"
                                           className="text-amber-500 border-amber-200 bg-amber-50"
                                         >
-                                          High
+                                          Повышен
                                         </Badge>
                                       ) : (
                                         <Badge variant="outline" className="text-blue-500 border-blue-200 bg-blue-50">
-                                          Low
+                                          Понижен
                                         </Badge>
                                       )}
                                     </div>
                                   </TooltipTrigger>
                                   <TooltipContent>
                                     {result.status === "normal"
-                                      ? "Within normal range"
+                                      ? "В пределах нормы"
                                       : result.status === "critical"
-                                        ? "Critical value - requires immediate attention"
+                                        ? "Критическое значение - требует немедленного внимания"
                                         : result.status === "high"
-                                          ? "Above normal range"
-                                          : "Below normal range"}
+                                          ? "Выше нормы"
+                                          : "Ниже нормы"}
                                   </TooltipContent>
                                 </Tooltip>
                               </TooltipProvider>
@@ -181,10 +181,10 @@ export default function ResultsPage() {
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b bg-muted/50">
-                            <th className="px-4 py-2.5 text-left font-medium">Test</th>
-                            <th className="px-4 py-2.5 text-left font-medium">Result</th>
-                            <th className="px-4 py-2.5 text-left font-medium">Reference Range</th>
-                            <th className="px-4 py-2.5 text-left font-medium">Status</th>
+                            <th className="px-4 py-2.5 text-left font-medium">Тест</th>
+                            <th className="px-4 py-2.5 text-left font-medium">Результат</th>
+                            <th className="px-4 py-2.5 text-left font-medium">Референсный Диапазон</th>
+                            <th className="px-4 py-2.5 text-left font-medium">Статус</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -197,14 +197,14 @@ export default function ResultsPage() {
                               <td className="px-4 py-2.5">{result.referenceRange}</td>
                               <td className="px-4 py-2.5">
                                 {result.status === "critical" ? (
-                                  <Badge variant="destructive">Critical</Badge>
+                                  <Badge variant="destructive">Критический</Badge>
                                 ) : result.status === "high" ? (
                                   <Badge variant="outline" className="text-amber-500 border-amber-200 bg-amber-50">
-                                    High
+                                    Повышен
                                   </Badge>
                                 ) : (
                                   <Badge variant="outline" className="text-blue-500 border-blue-200 bg-blue-50">
-                                    Low
+                                    Понижен
                                   </Badge>
                                 )}
                               </td>
@@ -217,8 +217,10 @@ export default function ResultsPage() {
                 ) : (
                   <div className="flex flex-col items-center justify-center py-8 text-center">
                     <Check className="h-12 w-12 text-green-500 mb-4" />
-                    <h3 className="text-lg font-medium">All Results Normal</h3>
-                    <p className="text-muted-foreground mt-1">All your test results are within normal ranges.</p>
+                    <h3 className="text-lg font-medium">Все Результаты в Норме</h3>
+                    <p className="text-muted-foreground mt-1">
+                      Все ваши результаты анализов находятся в пределах нормы.
+                    </p>
                   </div>
                 )}
               </TabsContent>
@@ -230,10 +232,10 @@ export default function ResultsPage() {
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b bg-muted/50">
-                            <th className="px-4 py-2.5 text-left font-medium">Test</th>
-                            <th className="px-4 py-2.5 text-left font-medium">Result</th>
-                            <th className="px-4 py-2.5 text-left font-medium">Reference Range</th>
-                            <th className="px-4 py-2.5 text-left font-medium">Status</th>
+                            <th className="px-4 py-2.5 text-left font-medium">Тест</th>
+                            <th className="px-4 py-2.5 text-left font-medium">Результат</th>
+                            <th className="px-4 py-2.5 text-left font-medium">Референсный Диапазон</th>
+                            <th className="px-4 py-2.5 text-left font-medium">Статус</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -256,8 +258,10 @@ export default function ResultsPage() {
                 ) : (
                   <div className="flex flex-col items-center justify-center py-8 text-center">
                     <Info className="h-12 w-12 text-amber-500 mb-4" />
-                    <h3 className="text-lg font-medium">No Normal Results</h3>
-                    <p className="text-muted-foreground mt-1">All your test results are outside normal ranges.</p>
+                    <h3 className="text-lg font-medium">Нет Нормальных Результатов</h3>
+                    <p className="text-muted-foreground mt-1">
+                      Все ваши результаты анализов находятся вне пределов нормы.
+                    </p>
                   </div>
                 )}
               </TabsContent>
@@ -267,22 +271,22 @@ export default function ResultsPage() {
 
         <Card>
           <CardHeader className="bg-sky-50 border-b">
-            <CardTitle className="text-2xl">Personalized Analysis</CardTitle>
+            <CardTitle className="text-2xl">Персонализированный Анализ</CardTitle>
             <CardDescription>
-              Based on your blood test results, our algorithm has generated the following analysis
+              На основе результатов вашего анализа крови наш алгоритм сгенерировал следующий анализ
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-medium mb-2">Explanation</h3>
+                <h3 className="text-lg font-medium mb-2">Объяснение</h3>
                 <div className="text-muted-foreground">
                   <p>{results.explanation}</p>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-lg font-medium mb-2">Recommendations</h3>
+                <h3 className="text-lg font-medium mb-2">Рекомендации</h3>
                 <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
                   {results.recommendations.map((recommendation, index) => (
                     <li key={index}>{recommendation}</li>
@@ -292,10 +296,10 @@ export default function ResultsPage() {
 
               <Alert className="bg-sky-50 border-sky-200">
                 <Info className="h-4 w-4 text-sky-600" />
-                <AlertTitle>Important Note</AlertTitle>
+                <AlertTitle>Важное Примечание</AlertTitle>
                 <AlertDescription>
-                  This analysis is generated by an algorithm and should not replace professional medical advice. Always
-                  consult with a healthcare provider regarding your test results.
+                  Этот анализ сгенерирован алгоритмом и не должен заменять профессиональную медицинскую консультацию.
+                  Всегда консультируйтесь с медицинским специалистом относительно ваших результатов анализов.
                 </AlertDescription>
               </Alert>
             </div>
@@ -303,10 +307,10 @@ export default function ResultsPage() {
           <CardFooter className="flex flex-col items-center gap-4 pt-6">
             <Button className="w-full sm:w-auto bg-sky-600 hover:bg-sky-700">
               <Calendar className="mr-2 h-4 w-4" />
-              Book an Appointment at Oncomed
+              Записаться на Прием в Онкомед
             </Button>
             <Button variant="outline" className="w-full sm:w-auto">
-              Download Results as PDF
+              Скачать Результаты в PDF
             </Button>
           </CardFooter>
         </Card>
