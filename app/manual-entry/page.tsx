@@ -114,6 +114,13 @@ export default function ManualEntryPage() {
       return
     }
 
+    // Проверка на нулевое значение lymphocytes_absolute
+    if (parseFloat(formData.lymphocytes_absolute) === 0) {
+      setError("Значение лимфоцитов (абсолютное) не может быть нулевым")
+      setIsLoading(false)
+      return
+    }
+
     try {
       // Call API with form data
       const results = await analyzeManualEntry(formData)

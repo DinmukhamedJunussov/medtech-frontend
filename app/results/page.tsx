@@ -111,7 +111,7 @@ export default function ResultsPage() {
       setAnalysisError(null)
 
       try {
-        const response = await fetch('https://witty-comic-mackerel.ngrok-free.app/blood-results', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blood-results`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
