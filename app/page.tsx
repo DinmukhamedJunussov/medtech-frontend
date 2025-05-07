@@ -20,22 +20,22 @@ export default function Home() {
             <span>Интерпретатор Анализов</span>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
-            <Link href="https://oncomed.kz/" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="https://oncomed.kz/" className="text-sm font-medium hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               О нас
             </Link>
-            <Link href="https://oncomed.kz/vidylecheniya" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="https://oncomed.kz/vidylecheniya" className="text-sm font-medium hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               Виды лечения
             </Link>
-            <Link href="https://oncomed.kz/nashyvrachi" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="https://oncomed.kz/nashyvrachi" className="text-sm font-medium hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               Наши врачи
             </Link>
-            <Link href="https://www.youtube.com/@oncomedastana" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="https://www.youtube.com/@oncomedastana" className="text-sm font-medium hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               Отзывы на YouTube
             </Link>
-            <Link href="https://oncomed.kz/" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="https://oncomed.kz/" className="text-sm font-medium hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               Прайс
             </Link>
-            <Link href="https://2gis.kz/astana/firm/70000001042561107" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="https://2gis.kz/astana/firm/70000001042561107" className="text-sm font-medium hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               Контакты
             </Link>
           </nav>
@@ -196,10 +196,10 @@ export default function Home() {
             © {new Date().getFullYear()} Интерпретатор Анализов Крови. Все права защищены.
           </p>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-            <Link href="#" className="text-xs hover:underline underline-offset-4">
+            <Link href="#" className="text-xs hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               Условия использования
             </Link>
-            <Link href="#" className="text-xs hover:underline underline-offset-4">
+            <Link href="#" className="text-xs hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               Конфиденциальность
             </Link>
           </nav>

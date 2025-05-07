@@ -182,53 +182,6 @@ export default function ResultsPage() {
         Вернуться на Главную
       </Link>
 
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle className="text-2xl">Результаты Анализа Крови</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {results?.results?.map((result, index) => (
-                <div key={index} className="bg-white p-4 rounded-lg shadow">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700">{result.name}</span>
-                    <span className={`px-2 py-1 rounded text-sm ${
-                      result.status === 'normal' ? 'bg-green-100 text-green-800' :
-                      result.status === 'high' ? 'bg-red-100 text-red-800' :
-                      'bg-yellow-100 text-yellow-800'
-                    }`}>
-                      {result.status === 'normal' ? 'Норма' :
-                       result.status === 'high' ? 'Повышен' : 'Понижен'}
-                    </span>
-                  </div>
-                  <div className="mt-2">
-                    <span className="text-2xl font-semibold text-gray-900">
-                      {formatValue(result.value)}
-                    </span>
-                    <span className="text-gray-500 ml-2">{result.unit}</span>
-                  </div>
-                  <div className="mt-1 text-sm text-gray-500">
-                    Референсный интервал: {result.referenceRange}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {(results.patient_id || results.lab_id || results.notes) && (
-            <div className="mt-6 pt-6 border-t">
-              <h3 className="font-semibold text-lg mb-4">Метаданные</h3>
-              <div className="space-y-2 text-muted-foreground">
-                {results.patient_id && <p>ID пациента: {results.patient_id}</p>}
-                {results.lab_id && <p>ID лаборатории: {results.lab_id}</p>}
-                {results.notes && <p>Дополнительные заметки: {results.notes}</p>}
-              </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
       <Card className="mt-6">
         <CardHeader className="bg-sky-50 border-b">
           <CardTitle className="text-2xl">Персонализированный Анализ</CardTitle>
@@ -295,6 +248,54 @@ export default function ResultsPage() {
           </Button>
         </CardFooter>
       </Card>
+      
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="text-2xl">Результаты Анализа Крови</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {results?.results?.map((result, index) => (
+                <div key={index} className="bg-white p-4 rounded-lg shadow">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-700">{result.name}</span>
+                    <span className={`px-2 py-1 rounded text-sm ${
+                      result.status === 'normal' ? 'bg-green-100 text-green-800' :
+                      result.status === 'high' ? 'bg-red-100 text-red-800' :
+                      'bg-yellow-100 text-yellow-800'
+                    }`}>
+                      {result.status === 'normal' ? 'Норма' :
+                       result.status === 'high' ? 'Повышен' : 'Понижен'}
+                    </span>
+                  </div>
+                  <div className="mt-2">
+                    <span className="text-2xl font-semibold text-gray-900">
+                      {formatValue(result.value)}
+                    </span>
+                    <span className="text-gray-500 ml-2">{result.unit}</span>
+                  </div>
+                  <div className="mt-1 text-sm text-gray-500">
+                    Референсный интервал: {result.referenceRange}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {(results.patient_id || results.lab_id || results.notes) && (
+            <div className="mt-6 pt-6 border-t">
+              <h3 className="font-semibold text-lg mb-4">Метаданные</h3>
+              <div className="space-y-2 text-muted-foreground">
+                {results.patient_id && <p>ID пациента: {results.patient_id}</p>}
+                {results.lab_id && <p>ID лаборатории: {results.lab_id}</p>}
+                {results.notes && <p>Дополнительные заметки: {results.notes}</p>}
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
     </div>
   )
 }

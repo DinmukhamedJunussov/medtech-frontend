@@ -41,6 +41,7 @@ export default function ManualEntryPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isFromUpload, setIsFromUpload] = useState(false)
 
   // Initialize form data with default values
   const [formData, setFormData] = useState<FormData>({
@@ -70,6 +71,7 @@ export default function ManualEntryPage() {
     if (uploadedResults) {
       try {
         const results = JSON.parse(uploadedResults)
+        setIsFromUpload(true)
         // Обновляем форму данными из результатов загрузки
         setFormData(prev => ({
           ...prev,
@@ -149,10 +151,13 @@ export default function ManualEntryPage() {
         <CardHeader>
           <CardTitle className="text-2xl flex items-center gap-2">
             <PenLine className="h-6 w-6 text-sky-600" />
-            Ручной Ввод
+            {isFromUpload ? "Проверка заполненных данных" : "Ручной Ввод"}
           </CardTitle>
           <CardDescription>
-            Введите значения анализа крови вручную для персонализированной интерпретации
+            {isFromUpload 
+              ? "Проверьте правильность заполнения значений анализа крови для персонализированной интерпретации"
+              : "Введите значения анализа крови вручную для персонализированной интерпретации"
+            }
           </CardDescription>
         </CardHeader>
         <CardContent>
