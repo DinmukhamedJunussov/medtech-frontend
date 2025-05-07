@@ -20,13 +20,22 @@ export default function Home() {
             <span>Интерпретатор Анализов</span>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
-            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="https://oncomed.kz/" className="text-sm font-medium hover:underline underline-offset-4">
               О нас
             </Link>
-            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-              Вопросы
+            <Link href="https://oncomed.kz/vidylecheniya" className="text-sm font-medium hover:underline underline-offset-4">
+              Виды лечения
             </Link>
-            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
+            <Link href="https://oncomed.kz/nashyvrachi" className="text-sm font-medium hover:underline underline-offset-4">
+              Наши врачи
+            </Link>
+            <Link href="https://www.youtube.com/@oncomedastana" className="text-sm font-medium hover:underline underline-offset-4">
+              Отзывы на YouTube
+            </Link>
+            <Link href="https://oncomed.kz/" className="text-sm font-medium hover:underline underline-offset-4">
+              Прайс
+            </Link>
+            <Link href="https://2gis.kz/astana/firm/70000001042561107" className="text-sm font-medium hover:underline underline-offset-4">
               Контакты
             </Link>
           </nav>
@@ -96,7 +105,7 @@ export default function Home() {
                       </div>
 
                       <h3 className="text-2xl font-bold mb-2">Ручной Ввод</h3>
-                      <p className="text-muted-foreground mb-2">Введите значения анализа крови вручную в нашу форму.</p>
+                      {/* <p className="text-muted-foreground mb-2">Введите значения анализа крови вручную в нашу форму.</p> */}
                       <p className="text-muted-foreground mb-8">
                         Введите значения ваших лабораторных показателей вручную в нашу форму
                       </p>

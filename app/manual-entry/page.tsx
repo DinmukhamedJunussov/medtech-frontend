@@ -11,27 +11,30 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Textarea } from "@/components/ui/textarea"
 import { analyzeManualEntry } from "@/lib/api"
 import { LoadingSpinner } from "@/components/loading-spinner"
 
 // Define the form data structure
 interface FormData {
-  gender: string
-  age: string
   hemoglobin: string
-  wbc: string
-  rbc: string
+  white_blood_cells: string
+  red_blood_cells: string
   platelets: string
-  hematocrit: string
-  mcv: string
-  mch: string
-  mchc: string
-  neutrophils: string
-  lymphocytes: string
-  monocytes: string
-  eosinophils: string
-  basophils: string
+  neutrophils_percent: string
+  neutrophils_absolute: string
+  lymphocytes_percent: string
+  lymphocytes_absolute: string
+  monocytes_percent: string
+  monocytes_absolute: string
+  eosinophils_percent: string
+  eosinophils_absolute: string
+  basophils_percent: string
+  basophils_absolute: string
+  test_date: string
+  patient_id: string
+  lab_id: string
+  notes: string
 }
 
 export default function ManualEntryPage() {
@@ -39,39 +42,32 @@ export default function ManualEntryPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  // Initialize form data with empty values
+  // Initialize form data with default values
   const [formData, setFormData] = useState<FormData>({
-    gender: "",
-    age: "",
-    hemoglobin: "",
-    wbc: "",
-    rbc: "",
-    platelets: "",
-    hematocrit: "",
-    mcv: "",
-    mch: "",
-    mchc: "",
-    neutrophils: "",
-    lymphocytes: "",
-    monocytes: "",
-    eosinophils: "",
-    basophils: "",
+    hemoglobin: "138",
+    white_blood_cells: "3.74",
+    red_blood_cells: "4.57",
+    platelets: "207",
+    neutrophils_percent: "57.7",
+    neutrophils_absolute: "2.16",
+    lymphocytes_percent: "29.4",
+    lymphocytes_absolute: "1.1",
+    monocytes_percent: "11",
+    monocytes_absolute: "0.41",
+    eosinophils_percent: "1.6",
+    eosinophils_absolute: "0.06",
+    basophils_percent: "0.3",
+    basophils_absolute: "0.01",
+    test_date: "",
+    patient_id: "",
+    lab_id: "",
+    notes: ""
   })
 
   // Handle form input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  // Handle select changes
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  // Handle radio group changes
-  const handleRadioChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, gender: value }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -80,8 +76,8 @@ export default function ManualEntryPage() {
     setError(null)
 
     // Basic validation
-    if (!formData.gender || !formData.age) {
-      setError("Пожалуйста, заполните все обязательные поля")
+    if (!formData.hemoglobin || !formData.white_blood_cells) {
+      setError("Пожалуйста, заполните обязательные поля")
       setIsLoading(false)
       return
     }
@@ -123,46 +119,13 @@ export default function ManualEntryPage() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Personal Information */}
+              {/* Basic Blood Count */}
               <div className="space-y-4 md:col-span-2">
-                <h3 className="text-lg font-medium">Личная Информация</h3>
-
-                <div className="space-y-2">
-                  <Label htmlFor="gender">Пол</Label>
-                  <RadioGroup value={formData.gender} onValueChange={handleRadioChange} className="flex space-x-4">
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="male" id="male" />
-                      <Label htmlFor="male">Мужской</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="female" id="female" />
-                      <Label htmlFor="female">Женский</Label>
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="age">Возраст</Label>
-                  <Input
-                    id="age"
-                    name="age"
-                    type="number"
-                    placeholder="Введите ваш возраст"
-                    value={formData.age}
-                    onChange={handleChange}
-                    min="1"
-                    max="120"
-                  />
-                </div>
-              </div>
-
-              {/* Complete Blood Count */}
-              <div className="space-y-4 md:col-span-2">
-                <h3 className="text-lg font-medium">Общий Анализ Крови (ОАК)</h3>
+                <h3 className="text-lg font-medium">Основные показатели</h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="hemoglobin">Гемоглобин (г/дл)</Label>
+                    <Label htmlFor="hemoglobin">Гемоглобин (г/л)</Label>
                     <Input
                       id="hemoglobin"
                       name="hemoglobin"
@@ -174,25 +137,25 @@ export default function ManualEntryPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="wbc">Лейкоциты (×10³/мкл)</Label>
+                    <Label htmlFor="white_blood_cells">Лейкоциты (×10³/мкл)</Label>
                     <Input
-                      id="wbc"
-                      name="wbc"
+                      id="white_blood_cells"
+                      name="white_blood_cells"
                       type="text"
-                      placeholder="напр., 7.5"
-                      value={formData.wbc}
+                      placeholder="напр., 6.8"
+                      value={formData.white_blood_cells}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="rbc">Эритроциты (×10⁶/мкл)</Label>
+                    <Label htmlFor="red_blood_cells">Эритроциты (×10⁶/мкл)</Label>
                     <Input
-                      id="rbc"
-                      name="rbc"
+                      id="red_blood_cells"
+                      name="red_blood_cells"
                       type="text"
-                      placeholder="напр., 5.0"
-                      value={formData.rbc}
+                      placeholder="напр., 4.5"
+                      value={formData.red_blood_cells}
                       onChange={handleChange}
                     />
                   </div>
@@ -208,54 +171,6 @@ export default function ManualEntryPage() {
                       onChange={handleChange}
                     />
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="hematocrit">Гематокрит (%)</Label>
-                    <Input
-                      id="hematocrit"
-                      name="hematocrit"
-                      type="text"
-                      placeholder="напр., 45"
-                      value={formData.hematocrit}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="mcv">MCV (фл)</Label>
-                    <Input
-                      id="mcv"
-                      name="mcv"
-                      type="text"
-                      placeholder="напр., 90"
-                      value={formData.mcv}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="mch">MCH (пг)</Label>
-                    <Input
-                      id="mch"
-                      name="mch"
-                      type="text"
-                      placeholder="напр., 30"
-                      value={formData.mch}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="mchc">MCHC (г/дл)</Label>
-                    <Input
-                      id="mchc"
-                      name="mchc"
-                      type="text"
-                      placeholder="напр., 33"
-                      value={formData.mchc}
-                      onChange={handleChange}
-                    />
-                  </div>
                 </div>
               </div>
 
@@ -265,66 +180,127 @@ export default function ManualEntryPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="neutrophils">Нейтрофилы (%)</Label>
+                    <Label htmlFor="neutrophils_percent">Нейтрофилы (%)</Label>
                     <Input
-                      id="neutrophils"
-                      name="neutrophils"
+                      id="neutrophils_percent"
+                      name="neutrophils_percent"
                       type="text"
-                      placeholder="напр., 60"
-                      value={formData.neutrophils}
+                      placeholder="напр., 60.0"
+                      value={formData.neutrophils_percent}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="lymphocytes">Лимфоциты (%)</Label>
+                    <Label htmlFor="neutrophils_absolute">Нейтрофилы (×10³/мкл)</Label>
                     <Input
-                      id="lymphocytes"
-                      name="lymphocytes"
+                      id="neutrophils_absolute"
+                      name="neutrophils_absolute"
                       type="text"
-                      placeholder="напр., 30"
-                      value={formData.lymphocytes}
+                      placeholder="напр., 4.1"
+                      value={formData.neutrophils_absolute}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="monocytes">Моноциты (%)</Label>
+                    <Label htmlFor="lymphocytes_percent">Лимфоциты (%)</Label>
                     <Input
-                      id="monocytes"
-                      name="monocytes"
+                      id="lymphocytes_percent"
+                      name="lymphocytes_percent"
                       type="text"
-                      placeholder="напр., 7"
-                      value={formData.monocytes}
+                      placeholder="напр., 30.0"
+                      value={formData.lymphocytes_percent}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="eosinophils">Эозинофилы (%)</Label>
+                    <Label htmlFor="lymphocytes_absolute">Лимфоциты (×10³/мкл)</Label>
                     <Input
-                      id="eosinophils"
-                      name="eosinophils"
+                      id="lymphocytes_absolute"
+                      name="lymphocytes_absolute"
                       type="text"
-                      placeholder="напр., 2"
-                      value={formData.eosinophils}
+                      placeholder="напр., 2.0"
+                      value={formData.lymphocytes_absolute}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="basophils">Базофилы (%)</Label>
+                    <Label htmlFor="monocytes_percent">Моноциты (%)</Label>
                     <Input
-                      id="basophils"
-                      name="basophils"
+                      id="monocytes_percent"
+                      name="monocytes_percent"
                       type="text"
-                      placeholder="напр., 1"
-                      value={formData.basophils}
+                      placeholder="напр., 5.0"
+                      value={formData.monocytes_percent}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="monocytes_absolute">Моноциты (×10³/мкл)</Label>
+                    <Input
+                      id="monocytes_absolute"
+                      name="monocytes_absolute"
+                      type="text"
+                      placeholder="напр., 0.3"
+                      value={formData.monocytes_absolute}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="eosinophils_percent">Эозинофилы (%)</Label>
+                    <Input
+                      id="eosinophils_percent"
+                      name="eosinophils_percent"
+                      type="text"
+                      placeholder="напр., 3.0"
+                      value={formData.eosinophils_percent}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="eosinophils_absolute">Эозинофилы (×10³/мкл)</Label>
+                    <Input
+                      id="eosinophils_absolute"
+                      name="eosinophils_absolute"
+                      type="text"
+                      placeholder="напр., 0.2"
+                      value={formData.eosinophils_absolute}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="basophils_percent">Базофилы (%)</Label>
+                    <Input
+                      id="basophils_percent"
+                      name="basophils_percent"
+                      type="text"
+                      placeholder="напр., 2.0"
+                      value={formData.basophils_percent}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="basophils_absolute">Базофилы (×10³/мкл)</Label>
+                    <Input
+                      id="basophils_absolute"
+                      name="basophils_absolute"
+                      type="text"
+                      placeholder="напр., 0.1"
+                      value={formData.basophils_absolute}
                       onChange={handleChange}
                     />
                   </div>
                 </div>
               </div>
+              
             </div>
 
             {error && <div className="text-red-500 text-sm">{error}</div>}

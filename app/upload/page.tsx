@@ -47,18 +47,16 @@ export default function UploadPage() {
     setError(null)
 
     try {
-      // In a real app, you would upload the file to the server
-      // For this demo, we'll simulate a delay and use mock data
       const formData = new FormData()
       formData.append("file", file)
 
-      // Simulate API call
+      // Получаем результаты анализа
       const results = await analyzeBloodTest(formData)
 
-      // Store results in localStorage for the results page
+      // Сохраняем результаты в localStorage для страницы результатов
       localStorage.setItem("bloodTestResults", JSON.stringify(results))
 
-      // Navigate to results page
+      // Перенаправляем на страницу результатов
       router.push("/results")
     } catch (err) {
       setError("Произошла ошибка при анализе ваших результатов. Пожалуйста, попробуйте снова.")
