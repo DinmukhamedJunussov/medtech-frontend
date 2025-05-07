@@ -53,11 +53,11 @@ export default function UploadPage() {
       // Получаем результаты анализа
       const results = await analyzeBloodTest(formData)
 
-      // Сохраняем результаты в localStorage для страницы результатов
-      localStorage.setItem("bloodTestResults", JSON.stringify(results))
+      // Сохраняем результаты в localStorage для страницы ручного ввода
+      localStorage.setItem("uploadedResults", JSON.stringify(results))
 
-      // Перенаправляем на страницу результатов
-      router.push("/results")
+      // Перенаправляем на страницу ручного ввода
+      router.push("/manual-entry")
     } catch (err) {
       setError("Произошла ошибка при анализе ваших результатов. Пожалуйста, попробуйте снова.")
       console.error(err)

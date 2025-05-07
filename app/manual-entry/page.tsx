@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, PenLine } from "lucide-react"
@@ -44,7 +44,7 @@ export default function ManualEntryPage() {
 
   // Initialize form data with default values
   const [formData, setFormData] = useState<FormData>({
-    hemoglobin: "138",
+    hemoglobin: "333",
     white_blood_cells: "3.74",
     red_blood_cells: "4.57",
     platelets: "207",
@@ -63,6 +63,38 @@ export default function ManualEntryPage() {
     lab_id: "",
     notes: ""
   })
+
+  // Загружаем данные из localStorage при монтировании компонента
+  useEffect(() => {
+    const uploadedResults = localStorage.getItem("uploadedResults")
+    if (uploadedResults) {
+      try {
+        const results = JSON.parse(uploadedResults)
+        // Обновляем форму данными из результатов загрузки
+        setFormData(prev => ({
+          ...prev,
+          hemoglobin: results.results[0]?.value?.toString() || prev.hemoglobin,
+          white_blood_cells: results.results[1]?.value?.toString() || prev.white_blood_cells,
+          red_blood_cells: results.results[2]?.value?.toString() || prev.red_blood_cells,
+          platelets: results.results[3]?.value?.toString() || prev.platelets,
+          neutrophils_percent: results.results[4]?.value?.toString() || prev.neutrophils_percent,
+          neutrophils_absolute: results.results[5]?.value?.toString() || prev.neutrophils_absolute,
+          lymphocytes_percent: results.results[6]?.value?.toString() || prev.lymphocytes_percent,
+          lymphocytes_absolute: results.results[7]?.value?.toString() || prev.lymphocytes_absolute,
+          monocytes_percent: results.results[8]?.value?.toString() || prev.monocytes_percent,
+          monocytes_absolute: results.results[9]?.value?.toString() || prev.monocytes_absolute,
+          eosinophils_percent: results.results[10]?.value?.toString() || prev.eosinophils_percent,
+          eosinophils_absolute: results.results[11]?.value?.toString() || prev.eosinophils_absolute,
+          basophils_percent: results.results[12]?.value?.toString() || prev.basophils_percent,
+          basophils_absolute: results.results[13]?.value?.toString() || prev.basophils_absolute,
+        }))
+        // Очищаем данные из localStorage после использования
+        localStorage.removeItem("uploadedResults")
+      } catch (err) {
+        console.error("Ошибка при загрузке данных из localStorage:", err)
+      }
+    }
+  }, [])
 
   // Handle form input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
