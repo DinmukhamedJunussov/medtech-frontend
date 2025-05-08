@@ -186,6 +186,8 @@ export async function analyzeBloodTest(formData: FormData) {
 // Function to analyze manually entered blood test values
 export async function analyzeManualEntry(formData: any) {
   try {
+    console.log('Отправляем данные на анализ:', formData);
+    
     // Отправляем данные на сервер для анализа
     const analysisResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blood-results`, {
       method: 'POST',
@@ -211,11 +213,17 @@ export async function analyzeManualEntry(formData: any) {
       }),
     })
 
+    console.log('Статус ответа:', analysisResponse.status);
+    console.log('Заголовки ответа:', Object.fromEntries(analysisResponse.headers.entries()));
+
     if (!analysisResponse.ok) {
-      throw new Error('Ошибка при анализе данных')
+      const errorText = await analysisResponse.text();
+      console.error('Ошибка ответа:', errorText);
+      throw new Error(`Ошибка при анализе данных: ${errorText}`);
     }
 
-    const analysisData = await analysisResponse.json()
+    const analysisData = await analysisResponse.json();
+    console.log('Полученные данные анализа:', analysisData);
 
     // Преобразуем все числовые значения и логируем их для отладки
     const processedData = {
