@@ -44,7 +44,7 @@ function getStatus(value: number, referenceRange: string): string {
 export async function analyzeBloodTest(formData: FormData) {
   try {
     // Отправляем файл на сервер для парсинга
-    const parseResponse = await fetch('https://witty-comic-mackerel.ngrok-free.app/parse-blood-test/', {
+    const parseResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/parse-blood-test/`, {
       method: 'POST',
       body: formData,
     })
@@ -56,7 +56,7 @@ export async function analyzeBloodTest(formData: FormData) {
     const parsedData = await parseResponse.json()
 
     // Отправляем полученные данные на сервер для анализа
-    const analysisResponse = await fetch('https://witty-comic-mackerel.ngrok-free.app/blood-results', {
+    const analysisResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blood-results`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -187,7 +187,7 @@ export async function analyzeBloodTest(formData: FormData) {
 export async function analyzeManualEntry(formData: any) {
   try {
     // Отправляем данные на сервер для анализа
-    const analysisResponse = await fetch('https://witty-comic-mackerel.ngrok-free.app/blood-results', {
+    const analysisResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blood-results`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
