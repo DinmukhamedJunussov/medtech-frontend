@@ -19,7 +19,7 @@ export default function Home() {
             <FileText className="h-5 w-5" />
             <span>Интерпретатор Анализов</span>
           </Link>
-          <nav className="ml-auto flex gap-4 sm:gap-6">
+          {/* <nav className="ml-auto flex gap-4 sm:gap-6">
             <Link href="https://oncomed.kz/" className="text-sm font-medium hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               О нас
             </Link>
@@ -38,7 +38,7 @@ export default function Home() {
             <Link href="https://2gis.kz/astana/firm/70000001042561107" className="text-sm font-medium hover:underline underline-offset-4" target="_blank" rel="noopener noreferrer">
               Контакты
             </Link>
-          </nav>
+          </nav> */}
         </div>
       </header>
       <main className="flex-1">
