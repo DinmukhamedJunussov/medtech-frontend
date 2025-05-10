@@ -44,7 +44,7 @@ function getStatus(value: number, referenceRange: string): string {
 export async function analyzeBloodTest(formData: FormData) {
   try {
     // Отправляем файл на сервер для парсинга
-    const parseResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/parse-blood-test/`, {
+    const parseResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/parse-blood-test`, {
       method: 'POST',
       body: formData,
     })
